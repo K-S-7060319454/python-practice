@@ -1,14 +1,33 @@
-from data import students
+import sqlite3
+from tabulate import tabulate
 def View():
-    if not students:
-        print("record is empty")
+    conn= sqlite3.connect("student.db")
+    cursor = conn.cursor()
+    cursor.execute("select* from students")
+    records = cursor.fetchall()
+    if not records:
+        print("empty records")
     else:
-        for student in students:
-            print("Name         : ", student[0])
-            print("Roll Number  : ", student[1])
-            print("AGE          : ", student[2])
-            print("DOB          : ", student[3])
-            print("Mobile Number: ", student[4])
-            print("Student Class: ", student[5])
-            print("Address      : ", student[6])
-            print("--------------------------------------")
+        headers = ["ID","NAME","ROLL NUMBER","AGE","DOB","MOBILE NO.", "ADDRESS"]
+        print(tabulate(records,headers=headers,tablefmt="grid"))
+    """ if not records:
+        print("empty records")
+    else:
+        for student in records:
+            print(" ID ->" , student[0],
+                  "name -> " , student[1], 
+                  "roll number -> ", student[2],
+                  "age -> ", student[3],
+                  "DOB -> ", student[4],
+                  "Mubile Number ->", student[5], 
+                  "Address -> ", student[6])"""
+    conn.close()
+if __name__ == "__main__":
+    View()
+    
+            
+            
+            
+            
+            
+           

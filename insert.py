@@ -6,7 +6,7 @@ conn = sqlite3.connect("student.db")
 cursor=conn.cursor()
 def insert():
     name= input("enter student name ")
-    roll=int(input("please enter student roll number"))
+    roll=int(input("pSlease enter student roll number"))
     age= int(input("enter student age "))
     dob =(input("enter student date of birth "))
     mobile=int(input("enter student mobile no. "))
@@ -15,7 +15,6 @@ def insert():
     cursor.execute(""" INSERT INTO students(name,roll,age,dob,mobile,address) 
                    VALUES(?,?,?,?,?,?)""",(name,roll,age,dob,mobile,address))
     conn.commit()
-    print("fffff")
 if __name__ == "__main__":
     insert()
     conn.close()
